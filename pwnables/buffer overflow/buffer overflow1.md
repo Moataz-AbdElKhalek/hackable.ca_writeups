@@ -7,9 +7,11 @@ The sourcecode of the executable is given in the challenge, (buffer_overflow1.c)
 
 # Solution
 
+1. Analyzing code
+2. crafting our buffer overflow input
 
-
-looking at the sourcecode we notice that this is an easy buffer overflow example. 
+## Analyzing code
+Looking at the sourcecode we notice that this is an easy buffer overflow example. 
 
 
 

